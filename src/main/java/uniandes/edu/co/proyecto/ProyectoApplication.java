@@ -24,7 +24,9 @@ public class ProyectoApplication implements CommandLineRunner {
 	@Override
 	public void run(String...arg) {
 		Collection<OrdenDeCompra> ordenes = ordenDeCompraRepository.darOrdenesDeCompra();
+		System.out.println("Número de órdenes: " + ordenes.size());
 		for (OrdenDeCompra o: ordenes) {
+			
 			System.out.println(o);
 		}
 	}

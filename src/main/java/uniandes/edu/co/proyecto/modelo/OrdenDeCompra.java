@@ -18,6 +18,7 @@ public class OrdenDeCompra {
     @GeneratedValue(strategy=GenerationType.AUTO)
     private Integer numero;
 
+    
     private LocalDate fechaEntrega;
     private String estado;
     private LocalDate fechaCreacion;
