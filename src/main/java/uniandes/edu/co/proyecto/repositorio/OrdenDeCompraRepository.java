@@ -34,4 +34,8 @@ public interface OrdenDeCompraRepository extends JpaRepository<OrdenDeCompra, In
     @Query(value = "UPDATE orden_de_compra SET estado = :estado WHERE numero = :numero", nativeQuery = true)
     void actualizarEstadoOrdenDeCompra(@Param("numero") Integer numero, @Param("estado") String estado);
 
+    // NUEVO!!! Consultar el estado de una orden de compra
+    @Query(value = "SELECT estado FROM orden_de_compra WHERE numero = :numero", nativeQuery = true)
+    String obtenerEstadoOrdenCompra(@Param("numero") Long numero);
+    
 }
