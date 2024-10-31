@@ -8,19 +8,21 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.stereotype.Controller;
 
 import uniandes.edu.co.proyecto.modelo.Bodega;
 import uniandes.edu.co.proyecto.repositorio.BodegaRepository;
 
 //Controlador de la entidad Bodega que se encarga de realizar las peticiones HTTP
-@RestController
+@Controller
 public class BodegaController {
 
     //Inyeccion de dependencias
@@ -32,6 +34,12 @@ public class BodegaController {
     public Collection<Bodega> bodegas(){
         return bodegaRepository.darBodegas();
     }
+
+    @GetMapping("/bodegas/nueva")
+    public String mostrarFormularioNuevaBodega() {
+        return "nuevaBodega"; // Este nombre debe coincidir con el archivo HTML en la carpeta de plantillas
+    }
+
 
     //Metodo que se encarga de devolver una bodega por su ID
     @GetMapping("/bodegas/{id}") //Indica que el metodo se activa cuando se hace una peticion GET a la URL /bodegas/{id}
@@ -62,6 +70,11 @@ public class BodegaController {
         }
     }
 
+    @GetMapping("/menuBodega")
+    public String menuBodega(Model model) {
+        return "menuBodega";
+    }
+
     //Metodo que se encarga de eliminar una bodega
     @DeleteMapping("/bodegas/{id}/delete") //Indica que el metodo se activa cuando se hace una peticion DELETE a la URL /bodegas/{id}/delete
     public ResponseEntity<String> bodegaEliminar(@PathVariable("id") int id) {
@@ -77,15 +90,26 @@ public class BodegaController {
         return new ResponseEntity<>("Bodega eliminada exitosamente", HttpStatus.OK);
     }
 
-    //Metodo que se encarga de obtener la ocupacion de las bodegas de una sucursal dados unos productos
-    @GetMapping("/bodegas/ocupacion") //Indica que el metodo se activa cuando se hace una peticion GET a la URL /bodegas/ocupacion
+    @GetMapping("/bodegas/eliminar")
+    public String mostrarFormularioEliminarBodega() {
+        return "eliminarBodega"; // Asegúrate de que este nombre coincida con el archivo HTML en templates
+    }
+
+    // Método para mostrar el formulario HTML de ocupación de bodegas
+    @GetMapping("/bodegas/ocupacion/formulario")
+    public String mostrarFormularioOcupacionBodegas() {
+        return "ocupacionBodegas"; // Asegúrate de que el archivo HTML se llame ocupacionBodegas.html y esté en templates
+    }
+
+
+    @GetMapping("/bodegas/ocupacion")
+    @ResponseBody
     public Collection<Map<String, Object>> obtenerOcupacionBodegas(
-            @RequestParam Integer idSucursalU, //Parametro de la peticion HTTP
+            @RequestParam Integer idSucursalU,
             @RequestParam Collection<Integer> listaProductosU) {
-        //Realizar la consulta a la base de datos
+
         Collection<Object[]> resultado = bodegaRepository.obtenerOcupacionBodegas(idSucursalU, listaProductosU);
-        
-        //Convertir el resultado de la consulta a un formato JSON
+
         Collection<Map<String, Object>> ocupacionBodegas = new ArrayList<>();
         for (Object[] fila : resultado) {
             Map<String, Object> bodega = new HashMap<>();
@@ -96,6 +120,7 @@ public class BodegaController {
         }
         return ocupacionBodegas;
     }
+
     
 
 }

@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <title>SuperAndes - Página Principal</title>
+    <style>
+        /* Paleta de colores en tonos verdes pastel */
+        :root {
+            --verde-pastel: #b3e5b3;
+            --verde-pastel-oscuro: #8ac48a;
+            --gris-oscuro: #4a4a4a;
+            --gris-claro: #f7f7f7;
+            --blanco: #ffffff;
+        }
+
+        body {
+            background-color: var(--gris-claro);
+            font-family: Arial, sans-serif;
+        }
+
+        .navbar {
+            background-color: var(--verde-pastel-oscuro);
+        }
+
+        .navbar-brand {
+            color: var(--blanco) !important;
+            font-weight: bold;
+        }
+
+        .container {
+            margin-top: 30px;
+        }
+
+        .card {
+            background-color: var(--blanco);
+            border-radius: 10px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .card-header {
+            background-color: var(--verde-pastel);
+            color: var(--verde-pastel-oscuro);
+            font-weight: bold;
+            border-top-left-radius: 10px;
+            border-top-right-radius: 10px;
+        }
+
+        .card-body p {
+            color: var(--gris-oscuro);
+        }
+
+        .btn-success {
+            background-color: var(--verde-pastel-oscuro);
+            border: none;
+        }
+
+        .btn-success:hover {
+            background-color: var(--verde-pastel);
+        }
+
+        .btn-info {
+            background-color: var(--verde-pastel);
+            border: none;
+            color: var(--gris-oscuro);
+        }
+
+        .btn-info:hover {
+            background-color: var(--verde-pastel-oscuro);
+            color: var(--blanco);
+        }
+
+        footer {
+            background-color: var(--verde-pastel-oscuro);
+            color: var(--blanco);
+            padding: 10px 0;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+    <!-- Barra de navegación -->
+    <nav class="navbar navbar-expand-lg">
+        <div class="container">
+            <a class="navbar-brand" href="/">SuperAndes</a>
+        </div>
+    </nav>
+
+    <div class="container">
+        <!-- Encabezado de bienvenida -->
+        <div class="text-center mb-4">
+            <h1 class="display-5 text-primary">Bienvenido a SuperAndes</h1>
+            <p class="lead text-muted">Tu supermercado de confianza. Aquí encontrarás productos frescos y de la mejor calidad.</p>
+        </div>
+
+        <!-- Tarjeta de opciones de gestión -->
+        <div class="card mx-auto" style="max-width: 600px;">
+            <div class="card-header text-center">
+                Opciones de Gestión
+            </div>
+            <div class="card-body text-center">
+                <p>Elige una de las opciones a continuación para gestionar nuestras ciudades, productos y sucursales.</p>
+                <div class="d-grid gap-3">
+                    <a href="/ciudades/nueva" class="btn btn-success btn-lg">Crear Nueva Ciudad</a>
+                    <a href="/menusucursales" class="btn btn-info btn-lg">Menú de Sucursales</a>
+                    <a href="/menuBodega" class="btn btn-info btn-lg">Menú de Bodegas</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Pie de página -->
+    <footer class="text-center mt-5">
+        <div class="container">
+            <p>&copy; 2024 SuperAndes. Hecho por el increíble Grupo 1.</p>
+        </div>
+    </footer>
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

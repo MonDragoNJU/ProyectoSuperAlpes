@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <title>Índice de Ocupación de Bodegas - SuperAndes</title>
+    <style>
+        :root {
+            --verde-pastel: #b3e5b3;
+            --verde-pastel-oscuro: #8ac48a;
+            --gris-oscuro: #4a4a4a;
+            --gris-claro: #f7f7f7;
+            --blanco: #ffffff;
+        }
+
+        body {
+            background-color: var(--gris-claro);
+            font-family: Arial, sans-serif;
+        }
+
+        .navbar {
+            background-color: var(--verde-pastel-oscuro);
+        }
+
+        .navbar-brand {
+            color: var(--blanco) !important;
+            font-weight: bold;
+        }
+
+        .container {
+            margin-top: 30px;
+            max-width: 600px;
+        }
+
+        .card {
+            background-color: var(--blanco);
+            border-radius: 10px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .card-header {
+            background-color: var(--verde-pastel);
+            color: var(--verde-pastel-oscuro);
+            font-weight: bold;
+            text-align: center;
+        }
+
+        .btn-primary {
+            background-color: var(--verde-pastel-oscuro);
+            border: none;
+            width: 100%;
+        }
+
+        .btn-primary:hover {
+            background-color: var(--verde-pastel);
+        }
+
+        .btn-secondary {
+            background-color: var(--gris-oscuro);
+            border: none;
+        }
+
+        .btn-secondary:hover {
+            background-color: var(--verde-pastel-oscuro);
+            color: var(--blanco);
+        }
+
+        footer {
+            background-color: var(--verde-pastel-oscuro);
+            color: var(--blanco);
+            padding: 10px 0;
+            font-size: 0.9em;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <!-- Barra de navegación -->
+    <nav class="navbar navbar-expand-lg">
+        <div class="container">
+            <a class="navbar-brand" href="/">SuperAndes</a>
+        </div>
+    </nav>
+
+    <div class="container">
+        <header class="text-center my-4">
+            <h1 class="display-6 text-primary">Índice de Ocupación de Bodegas</h1>
+        </header>
+
+        <!-- Tarjeta del formulario -->
+        <div class="card">
+            <div class="card-header">
+                Consultar Ocupación de Bodegas por Sucursal y Productos
+            </div>
+            <div class="card-body">
+                <form id="ocupacionForm">
+                    <div class="mb-3">
+                        <label for="idSucursal" class="form-label">ID de la Sucursal</label>
+                        <input type="number" class="form-control" id="idSucursal" required min="1" placeholder="Ingrese ID de la sucursal">
+                    </div>
+                    <div class="mb-3">
+                        <label for="listaProductos" class="form-label">IDs de Productos (separados por coma)</label>
+                        <input type="text" class="form-control" id="listaProductos" required placeholder="Ejemplo: 101,102,103">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Consultar Ocupación</button>
+                </form>
+                <div id="resultados" class="mt-4"></div>
+            </div>
+        </div>
+
+        <div class="text-center my-4">
+            <a href="/menuBodega" class="btn btn-secondary">Volver al Menú de Bodegas</a>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 SuperAndes. Hecho por el increíble Grupo 1.</p>
+        </div>
+    </footer>
+
+    <script>
+        document.getElementById('ocupacionForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            const idSucursal = document.getElementById('idSucursal').value;
+            const listaProductos = document.getElementById('listaProductos').value.split(',').map(Number);
+
+            fetch(`/bodegas/ocupacion?idSucursalU=${idSucursal}&listaProductosU=${listaProductos.join(',')}`)
+                .then(response => response.json())
+                .then(data => {
+                    if (Array.isArray(data)) {
+                        let resultadosHTML = '<h3>Resultados:</h3><ul class="list-group">';
+                        data.forEach(bodega => {
+                            resultadosHTML += `
+                                <li class="list-group-item">
+                                    <strong>ID Bodega:</strong> ${bodega.id}<br>
+                                    <strong>Nombre:</strong> ${bodega.nombre}<br>
+                                    <strong>Porcentaje de Ocupación:</strong> ${bodega.porcentajeOcupacion.toFixed(2)}%
+                                </li>`;
+                        });
+                        resultadosHTML += '</ul>';
+                        document.getElementById('resultados').innerHTML = resultadosHTML;
+                    } else {
+                        document.getElementById('resultados').innerHTML = `<p class='text-danger'>Error: La respuesta no es válida.</p>`;
+                    }
+                })
+                .catch(error => {
+                    document.getElementById('resultados').innerHTML = `<p class='text-danger'>Error: ${error.message}</p>`;
+                });
+        });
+    </script>
+</body>
+</html>

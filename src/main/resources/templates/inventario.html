@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Productos en Bodega - SuperAndes</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f7f7f7;
+            font-family: Arial, sans-serif;
+        }
+
+        .navbar {
+            background-color: #4CAF50;
+        }
+
+        .navbar-brand {
+            color: white !important;
+        }
+
+        .container {
+            margin-top: 30px;
+            max-width: 600px;
+        }
+
+        .card {
+            margin-top: 20px;
+        }
+
+        .btn-primary {
+            width: 100%;
+            background-color: #4CAF50;
+            border: none;
+        }
+
+        .btn-primary:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg">
+        <div class="container">
+            <a class="navbar-brand" href="/">SuperAndes</a>
+        </div>
+    </nav>
+
+    <div class="container">
+        <header class="text-center my-4">
+            <h1 class="display-6">Consultar Productos en Bodega</h1>
+        </header>
+
+        <div class="card">
+            <div class="card-body">
+                <form id="productosForm">
+                    <div class="mb-3">
+                        <label for="idSucursal" class="form-label">ID de la Sucursal</label>
+                        <input type="number" class="form-control" id="idSucursal" required min="1" placeholder="Ingrese ID de la sucursal">
+                    </div>
+                    <div class="mb-3">
+                        <label for="idBodega" class="form-label">ID de la Bodega</label>
+                        <input type="number" class="form-control" id="idBodega" required min="1" placeholder="Ingrese ID de la bodega">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Consultar Productos</button>
+                </form>
+                <div id="resultados" class="mt-4"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('productosForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            const idSucursal = document.getElementById('idSucursal').value;
+            const idBodega = document.getElementById('idBodega').value;
+
+            fetch(`/productos/productosEnBodega?idSucursal=${idSucursal}&idBodega=${idBodega}`)
+                .then(response => response.json())
+                .then(data => {
+                    let resultadosHTML = '<h3>Productos en la Bodega:</h3>';
+                    if (data.length > 0) {
+                        resultadosHTML += `
+                            <table class="table table-striped mt-3">
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Nombre</th>
+                                        <th>Nivel Mínimo Reorden</th>
+                                        <th>Costo Promedio</th>
+                                        <th>Cantidad en Bodega</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                        `;
+                        data.forEach(producto => {
+                            resultadosHTML += `
+                                <tr>
+                                    <td>${producto.id}</td>
+                                    <td>${producto.nombre}</td>
+                                    <td>${producto.nivelMinimoReorden}</td>
+                                    <td>${producto.costoPromedio}</td>
+                                    <td>${producto.cantidadEnBodega}</td>
+                                </tr>
+                            `;
+                        });
+                        resultadosHTML += `
+                                </tbody>
+                            </table>
+                        `;
+                    } else {
+                        resultadosHTML = '<p class="text-warning">No se encontraron productos para los IDs proporcionados.</p>';
+                    }
+                    document.getElementById('resultados').innerHTML = resultadosHTML;
+                })
+                .catch(error => {
+                    document.getElementById('resultados').innerHTML = `<p class="text-danger">Error: ${error.message}</p>`;
+                });
+        });
+    </script>
+</body>
+</html>

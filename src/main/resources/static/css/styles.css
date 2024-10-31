@@ -1,0 +1,36 @@
+body {
+    background-color: #f8f9fa; /* Color de fondo suave */
+}
+
+header {
+    background-color: #e9ecef; /* Fondo claro para el encabezado */
+    padding: 20px;
+    border-radius: 10px;
+}
+
+h1 {
+    font-weight: bold;
+}
+
+section {
+    border: 1px solid #dee2e6; /* Bordes sutiles */
+    border-radius: 10px;
+    padding: 20px;
+    background-color: white; /* Fondo blanco para sección */
+}
+
+footer {
+    font-size: 0.9em;
+}
+
+.list-group-item {
+    border: 1px solid #ddd;
+    margin-bottom: 10px;
+    padding: 15px;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+}
+
+.list-group-item strong {
+    color: #007bff;
+}

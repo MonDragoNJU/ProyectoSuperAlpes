@@ -8,18 +8,20 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import uniandes.edu.co.proyecto.modelo.Producto;
 import uniandes.edu.co.proyecto.repositorio.ProductoRepository;
+import org.springframework.stereotype.Controller;
 
 //Controlador de la entidad Producto que se encarga de realizar las peticiones HTTP
-@RestController
+@Controller
 public class ProductoController {
 
     //Inyeccion de dependencias
@@ -113,9 +115,15 @@ public class ProductoController {
         return productoRepository.darProductosFiltrados(precioMinU, precioMaxU, fechaSuperiorU, fechaInferiorU, sucursalIdU, categoriaNombreU);
     }
 
+    @GetMapping("/productos/productosEnBodega/formulario")
+    public String menuBodega(Model model) {
+        return "inventario";
+    }
+
     //Para RCF4:
     //Metodo que se encarga de obtener los productos en una bodega dada de una sucursal dada
     @GetMapping("/productos/productosEnBodega")
+    @ResponseBody
     public Collection<Map<String, Object>> obtenerProductosEnBodega(
             @RequestParam Integer idSucursal,
             @RequestParam Integer idBodega) {
