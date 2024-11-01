@@ -96,17 +96,11 @@ public class IngresoProductoService {
                 int cantidadIngresada = productoPedido.getCantidadEnOrden();
                 double precioUnitario = producto.getCostoEnBodega();
 
-                //Asumimos cantidad anterior como 0, pero si el producto ya existe, se actualiza luego
-                Integer cantidadAnterior = productoEnBodegaRepository.findCantidadEnBodega(producto.getIdentificador(), idBodega);
-                cantidadAnterior = (cantidadAnterior == null) ? 0 : cantidadAnterior;
-
-
                 //Verificar si el producto ya está en la bodega o no, segun eso se crea o se suma la cantidad
                 ProductoEnBodega productoEnBodega = productoEnBodegaRepository.findByProductoYBodega(producto.getIdentificador(), idBodega);
 
                 
                 if (productoEnBodega != null) {
-
                     //Nos apoyamos del query que ya hace las actualizaciones de cantidad y ademas recalcula el costo promedio
                     productoEnBodegaRepository.actualizarCostoPromedioyCantidad(producto.getIdentificador(), idBodega, precioUnitario, cantidadIngresada);
 
@@ -114,6 +108,7 @@ public class IngresoProductoService {
                     productoEnBodega = productoEnBodegaRepository.findByProductoYBodega(producto.getIdentificador(), idBodega);
                 } 
                 else {
+                    // Si el producto no estaba en la bodega, lo agregamos como uno nuevo
 
                     // Si el producto no estaba en la bodega, lo agregamos como nuevo
                     //El minimo de reorden y la capacidad de almacenar seran 1 por defecto
@@ -131,7 +126,6 @@ public class IngresoProductoService {
                 productoDatos.put("identificador", producto.getIdentificador());
                 productoDatos.put("nombre", producto.getNombre());
                 productoDatos.put("precioUnitario", precioUnitario);
-                productoDatos.put("cantidadAnterior", cantidadAnterior);
                 productoDatos.put("cantidadIngresada", cantidadIngresada);
                 productoDatos.put("nuevaCantidadEnBodega", productoEnBodega.getCantidadEnBodega());
                 productoDatos.put("costoPromedio", productoEnBodega.getCostoPromedio());
