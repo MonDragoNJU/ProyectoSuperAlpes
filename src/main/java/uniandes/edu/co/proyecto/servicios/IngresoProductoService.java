@@ -96,11 +96,18 @@ public class IngresoProductoService {
                 int cantidadIngresada = productoPedido.getCantidadEnOrden();
                 double precioUnitario = producto.getCostoEnBodega();
 
+                //Cantidad anterior sera cero, si ya existe entonces se cambia mas adelante
+                int cantidadAnterior = 0;
+
                 //Verificar si el producto ya está en la bodega o no, segun eso se crea o se suma la cantidad
                 ProductoEnBodega productoEnBodega = productoEnBodegaRepository.findByProductoYBodega(producto.getIdentificador(), idBodega);
 
                 
                 if (productoEnBodega != null) {
+
+                    //Obtenemos la cantidad anterior antes de modificar
+                    cantidadAnterior = productoEnBodega.getCantidadEnBodega();
+
                     //Nos apoyamos del query que ya hace las actualizaciones de cantidad y ademas recalcula el costo promedio
                     productoEnBodegaRepository.actualizarCostoPromedioyCantidad(producto.getIdentificador(), idBodega, precioUnitario, cantidadIngresada);
 
@@ -126,6 +133,7 @@ public class IngresoProductoService {
                 productoDatos.put("identificador", producto.getIdentificador());
                 productoDatos.put("nombre", producto.getNombre());
                 productoDatos.put("precioUnitario", precioUnitario);
+                productoDatos.put("cantidadAnterior", cantidadAnterior);
                 productoDatos.put("cantidadIngresada", cantidadIngresada);
                 productoDatos.put("nuevaCantidadEnBodega", productoEnBodega.getCantidadEnBodega());
                 productoDatos.put("costoPromedio", productoEnBodega.getCostoPromedio());
