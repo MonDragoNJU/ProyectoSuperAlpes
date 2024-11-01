@@ -115,8 +115,7 @@ public class IngresoProductoService {
                     //El costo promedio es su precio unitario (inicialmente)
                     //La cantidad en bodega es la cantidad ingresada (inicialmente)
                     productoEnBodega = new ProductoEnBodega(producto, bodega, 1, precioUnitario, 1, cantidadIngresada);
-                    productoEnBodegaRepository.save(productoEnBodega);
-            
+
                      //Persistir el producto creado en la bodega (en BD)
                     productoEnBodegaRepository.save(productoEnBodega);
                 }
