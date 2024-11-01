@@ -21,7 +21,7 @@ public interface ProductoEnBodegaRepository extends JpaRepository<ProductoEnBode
     @Transactional
     @Query(value = "UPDATE PRODUCTO_EN_BODEGA \r\n" +
                    "SET CANTIDAD_EN_BODEGA = CANTIDAD_EN_BODEGA + :cantidadIngresada, \r\n" +
-                   "COSTO_PROMEDIO = ((COSTO_PROMEDIO * CANTIDAD_EN_BODEGA) + (:precioUnitario * :cantidadIngresada)) / (CANTIDAD_EN_BODEGA + :cantidadIngresada) " +
+                   "COSTO_PROMEDIO = ((COSTO_PROMEDIO * CANTIDAD_EN_BODEGA) + (:precioUnitario * :cantidadIngresada)) / (CANTIDAD_EN_BODEGA + :cantidadIngresada) \r\n" +
                    "WHERE IDENTIFICADOR_PRODUCTO = :idProducto AND ID_BODEGA = :idBodega", nativeQuery = true)
     void actualizarCostoPromedioyCantidad(@Param("idProducto") Integer idProducto, @Param("idBodega") Integer idBodega, @Param("precioUnitario") Double precioUnitario, @Param("cantidadIngresada") Integer cantidadIngresada);
 }
