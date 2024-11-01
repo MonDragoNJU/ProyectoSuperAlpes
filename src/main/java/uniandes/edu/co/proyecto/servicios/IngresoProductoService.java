@@ -96,17 +96,16 @@ public class IngresoProductoService {
                 int cantidadIngresada = productoPedido.getCantidadEnOrden();
                 double precioUnitario = producto.getCostoEnBodega();
 
-                //Cantidad anterior sera cero, si ya existe entonces se cambia mas adelante
-                int cantidadAnterior;
+                //Asumimos cantidad anterior como 0, pero si el producto ya existe, se actualiza luego
+                Integer cantidadAnterior = productoEnBodegaRepository.findCantidadEnBodega(producto.getIdentificador(), idBodega);
+                cantidadAnterior = (cantidadAnterior == null) ? 0 : cantidadAnterior;
+
 
                 //Verificar si el producto ya está en la bodega o no, segun eso se crea o se suma la cantidad
                 ProductoEnBodega productoEnBodega = productoEnBodegaRepository.findByProductoYBodega(producto.getIdentificador(), idBodega);
 
                 
                 if (productoEnBodega != null) {
-
-                    //Obtenemos la cantidad anterior antes de modificar
-                    cantidadAnterior = productoEnBodega.getCantidadEnBodega();
 
                     //Nos apoyamos del query que ya hace las actualizaciones de cantidad y ademas recalcula el costo promedio
                     productoEnBodegaRepository.actualizarCostoPromedioyCantidad(producto.getIdentificador(), idBodega, precioUnitario, cantidadIngresada);
@@ -115,9 +114,6 @@ public class IngresoProductoService {
                     productoEnBodega = productoEnBodegaRepository.findByProductoYBodega(producto.getIdentificador(), idBodega);
                 } 
                 else {
-
-                    //Si el producto no estaba en la bodega, la cantidad anterior es cero
-                    cantidadAnterior = 0;
 
                     // Si el producto no estaba en la bodega, lo agregamos como nuevo
                     //El minimo de reorden y la capacidad de almacenar seran 1 por defecto
