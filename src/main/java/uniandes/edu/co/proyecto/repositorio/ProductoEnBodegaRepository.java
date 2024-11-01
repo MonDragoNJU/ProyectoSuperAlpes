@@ -23,6 +23,6 @@ public interface ProductoEnBodegaRepository extends JpaRepository<ProductoEnBode
                    "SET CANTIDAD_EN_BODEGA = CANTIDAD_EN_BODEGA + :cantidadIngresada, \r\n" +
                    "COSTO_PROMEDIO = ((COSTO_PROMEDIO * CANTIDAD_EN_BODEGA) + (:precioUnitario * :cantidadIngresada)) / (CANTIDAD_EN_BODEGA + :cantidadIngresada) " +
                    "WHERE IDENTIFICADOR_PRODUCTO = :idProducto AND ID_BODEGA = :idBodega", nativeQuery = true)
-    void actualizarCostoPromedioYcantidad(@Param("idProducto") Integer idProducto, @Param("idBodega") Integer idBodega, @Param("precioUnitario") Double precioUnitario, @Param("cantidadIngresada") Integer cantidadIngresada);
+    void actualizarCostoPromedioyCantidad(@Param("idProducto") Integer idProducto, @Param("idBodega") Integer idBodega, @Param("precioUnitario") Double precioUnitario, @Param("cantidadIngresada") Integer cantidadIngresada);
 }
 
