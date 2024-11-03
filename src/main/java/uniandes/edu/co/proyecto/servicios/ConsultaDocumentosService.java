@@ -33,7 +33,7 @@ public class ConsultaDocumentosService {
             LocalDate fechaLimite = LocalDate.now().minusDays(30);
 
             //Tomamos los docs de ingreso de los últimos 30 dias al hacer la busqueda con el repository
-            List<Map<String, Object>> documentos = documentoIngresoRepository.obtenerDocumentosIngreso(idSucursal, idBodega, fechaLimite);
+            List<Map<String, Object>> documentos = documentoIngresoRepository.obtenerDocumentosIngresoForUpdate(idSucursal, idBodega, fechaLimite);
 
             // Temporizador de 30 segundos antes de la consulta
             Thread.sleep(30000);
