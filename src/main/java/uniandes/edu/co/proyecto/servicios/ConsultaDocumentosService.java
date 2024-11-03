@@ -36,7 +36,7 @@ public class ConsultaDocumentosService {
         try {
 
             // Temporizador de 30 segundos antes de la consulta
-            Thread.sleep(40000);
+            Thread.sleep(30000);
 
             //Tomamos los docs de ingreso de los últimos 30 dias al hacer la busqueda con el repository
             List<Map<String, Object>> documentos = documentoIngresoRepository.obtenerDocumentosIngresoForUpdate(idSucursal, idBodega, fechaInicio, fechaFinal);
