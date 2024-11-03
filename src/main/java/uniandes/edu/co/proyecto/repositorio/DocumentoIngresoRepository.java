@@ -8,10 +8,12 @@ import java.util.Map;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.jpa.repository.QueryHints;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import jakarta.persistence.QueryHint;
 import uniandes.edu.co.proyecto.modelo.DocumentoIngreso;
 
 @Repository
@@ -42,7 +44,8 @@ public interface DocumentoIngresoRepository extends JpaRepository<DocumentoIngre
         "ORDER BY DOCUMENTO_INGRESO.FECHA_INGRESO DESC \r\n" +
         "FOR UPDATE", nativeQuery = true)
         //Usamos un map por lo que no solo regresa objetos de tipo DocumentoIngreso, sino otros elementos 
-    List<Map<String, Object>> obtenerDocumentosIngreso(@Param("idSucursal") Long idSucursal, @Param("idBodega") Long idBodega, @Param("fechaLimite") LocalDate fechaLimite);
+        @QueryHints(value = {@QueryHint(name = "javax.persistence.lock.timeout", value = "0")})
+        List<Map<String, Object>> obtenerDocumentosIngreso(@Param("idSucursal") Long idSucursal, @Param("idBodega") Long idBodega, @Param("fechaLimite") LocalDate fechaLimite);
 
 }
 
