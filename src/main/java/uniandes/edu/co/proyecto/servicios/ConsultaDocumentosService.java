@@ -39,7 +39,7 @@ public class ConsultaDocumentosService {
             Thread.sleep(30000);
 
             //Tomamos los docs de ingreso de los últimos 30 dias al hacer la busqueda con el repository
-            List<Map<String, Object>> documentos = documentoIngresoRepository.obtenerDocumentosIngresoForUpdate(idSucursal, idBodega, fechaLimite);
+            List<Map<String, Object>> documentos = documentoIngresoRepository.obtenerDocumentosIngresoForUpdate(idSucursal, idBodega, fechaInicio, fechaFinal);
 
             //¿Hay documentos en los ultimos 30 dias?
             //Si la consulta no da como resultado vacio, entonces si hay
