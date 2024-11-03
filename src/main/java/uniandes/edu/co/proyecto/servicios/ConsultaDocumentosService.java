@@ -34,11 +34,11 @@ public class ConsultaDocumentosService {
 
         try {
 
-            // Temporizador de 30 segundos antes de la consulta
-            Thread.sleep(30000);
-
             //Tomamos los docs de ingreso de los últimos 30 dias al hacer la busqueda con el repository
             List<Map<String, Object>> documentos = documentoIngresoRepository.obtenerDocumentosIngresoForUpdate(idSucursal, idBodega, fechaInicio, fechaFinal);
+
+             // Temporizador de 30 segundos antes de la consulta
+             Thread.sleep(30000);
 
             //¿Hay documentos en los ultimos 30 dias?
             //Si la consulta no da como resultado vacio, entonces si hay
@@ -87,7 +87,6 @@ public class ConsultaDocumentosService {
     //RFC7: Este es el metodo con nivel de aislamiento read committed
     @Transactional(isolation = Isolation.READ_COMMITTED, rollbackFor = Exception.class)
     public ResponseEntity<?> obtenerDocumentosIngresoReadCommitted(Long idSucursal, Long idBodega)  {
-
 
         try {
 
