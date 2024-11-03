@@ -6,13 +6,13 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
     <title>Menú de Órdenes de Compra - SuperAndes</title>
     <style>
-        /* Paleta de colores en tonos verdes pastel */
         :root {
             --verde-pastel: #b3e5b3;
             --verde-pastel-oscuro: #8ac48a;
             --gris-oscuro: #4a4a4a;
             --gris-claro: #f7f7f7;
             --blanco: #ffffff;
+            --azul: #072e45;
         }
 
         body {
@@ -31,27 +31,28 @@
 
         .container {
             margin-top: 30px;
-            max-width: 600px;
         }
 
         .card {
             background-color: var(--blanco);
             border-radius: 10px;
             box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-            text-align: center;
-            padding: 20px;
+            max-width: 600px;
+            margin: 0 auto;
         }
 
-        .btn-option {
+        .card-header {
+            background-color: var(--verde-pastel);
+            color: var(--verde-pastel-oscuro);
+            font-weight: bold;
+            text-align: center;
+        }
+
+        .btn-primary, .btn-secondary {
             background-color: var(--verde-pastel-oscuro);
             border: none;
             width: 100%;
             margin-top: 10px;
-            color: var(--blanco);
-        }
-
-        .btn-option:hover {
-            background-color: var(--verde-pastel);
         }
 
         footer {
@@ -61,25 +62,47 @@
             font-size: 0.9em;
             text-align: center;
         }
+
+        .btn-secondary {
+            background-color: var(--gris-oscuro);
+            border: none;
+        }
+
+        .btn-secondary:hover {
+            background-color: var(--verde-pastel-oscuro);
+            color: var(--blanco);
+        }
     </style>
 </head>
 <body>
     <!-- Barra de navegación -->
     <nav class="navbar navbar-expand-lg">
         <div class="container">
-            <a class="navbar-brand" href="/">SuperAndes</a>
+            <a class="navbar-brand" href="/"><img src="https://i.ibb.co/nzJ9cXh/logo.png" width="60" height="60" alt="SuperAndes Logo">
+                <span style="color: var(--azul);">SuperAndes</span></a>
         </div>
     </nav>
 
     <div class="container">
-        <!-- Tarjeta de menú principal -->
+        <header class="text-center my-4">
+            <h1 class="display-6 text-primary" style="font-weight: bold">Menú de Órdenes de Compra</h1>
+        </header>
+
         <div class="card">
-            <h2>Menú de Órdenes de Compra</h2>
-            <p>Seleccione una opción:</p>
-            <a href="/ordenesDeCompra/crear" class="btn btn-option">Crear Nueva Orden de Compra</a>
-            <a href="/ordenesDeCompra/ver" class="btn btn-option">Ver Todas las Órdenes de Compra</a>
-            <a href="/ingresoProductos/formulario" class="btn btn-option">Registrar ingreso de productos</a>
-            <a href="/documentosIngreso/formulario" class="btn btn-option">Revisar documentos</a>
+            <div class="card-header text-center">
+                Opciones de Órdenes de Compra
+            </div>
+            <div class="card-body text-center">
+                <a href="/ordenesDeCompra/crear" class="btn btn-primary btn-lg my-2">Crear Nueva Orden de Compra</a>
+                <a href="/ordenesDeCompra/ver" class="btn btn-primary btn-lg my-2">Ver Todas las Órdenes de Compra</a>
+                <a href="/ingresoProductos/formulario" class="btn btn-primary btn-lg my-2">Registrar ingreso de productos</a>
+                <a href="/documentosIngreso/formulario" class="btn btn-primary btn-lg my-2">Revisar documentos</a>
+            </div>
+        </div>
+
+        <!-- Botón de regreso al inicio -->
+        <div class="text-center my-4">
+            <a href="/" class="btn btn-secondary" style="width: auto;">Volver al Inicio</a>
         </div>
     </div>
 

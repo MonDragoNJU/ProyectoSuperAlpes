@@ -13,6 +13,7 @@
             --gris-oscuro: #4a4a4a;
             --gris-claro: #f7f7f7;
             --blanco: #ffffff;
+            --azul: #072e45;
         }
 
         body {
@@ -87,14 +88,15 @@
     <!-- Barra de navegación -->
     <nav class="navbar navbar-expand-lg">
         <div class="container">
-            <a class="navbar-brand" href="/">SuperAndes</a>
+            <a class="navbar-brand" href="/"><img src="https://i.ibb.co/nzJ9cXh/logo.png" width="60" height="60" alt="SuperAndes Logo" class="d-inline-block align-text-center">
+                <span style="color: var(--azul);">SuperAndes</span></a>
         </div>
     </nav>
 
     <div class="container">
         <!-- Encabezado de Buscar Sucursal -->
         <header class="text-center my-4">
-            <h1 class="display-6 text-primary">Buscar Sucursal por Producto</h1>
+            <h1 class="display-6 text-primary" style="font-weight: bold">Buscar Sucursal por Producto</h1>
         </header>
 
         <!-- Tarjeta del formulario de búsqueda -->
@@ -126,8 +128,9 @@
 
         <!-- Botón de regreso al inicio -->
         <div class="text-center my-4">
-            <a href="/" class="btn btn-secondary">Volver al Inicio</a>
+            <a href="/menusucursales" class="btn btn-secondary">Volver a Menú Sucursales</a>
         </div>
+    </div>
 
         <!-- Pie de página -->
         <footer class="text-center">
@@ -135,7 +138,7 @@
                 <p>&copy; 2024 SuperAndes. Hecho por el increíble Grupo 1.</p>
             </div>
         </footer>
-    </div>
+    
 
     <script>
         document.getElementById('criterio').addEventListener('change', function() {
