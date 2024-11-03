@@ -2,6 +2,7 @@ package uniandes.edu.co.proyecto.repositorio;
 
 import java.time.LocalDate;
 import java.util.Collection;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -54,7 +55,7 @@ public interface DocumentoIngresoRepository extends JpaRepository<DocumentoIngre
                "ORDER BY DOCUMENTO_INGRESO.FECHA_INGRESO DESC \r\n" +
                "FOR UPDATE",
        nativeQuery = true)
-    List<Map<String, Object>> obtenerDocumentosIngresoForUpdate(@Param("idSucursal") Long idSucursal, @Param("idBodega") Long idBodega, @Param("fechaInicio") LocalDate fechaInicio, @Param("fechaLimite") LocalDate fechaLimite
+    List<Map<String, Object>> obtenerDocumentosIngresoForUpdate(@Param("idSucursal") Long idSucursal, @Param("idBodega") Long idBodega, @Param("fechaInicio") Date fechaInicio, @Param("fechaLimite") Date fechaLimite
 );
 
 }
