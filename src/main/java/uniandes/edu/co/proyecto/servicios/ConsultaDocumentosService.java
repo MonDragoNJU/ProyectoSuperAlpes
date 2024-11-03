@@ -1,10 +1,11 @@
 package uniandes.edu.co.proyecto.servicios;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -23,20 +24,21 @@ public class ConsultaDocumentosService {
     private DocumentoIngresoRepository documentoIngresoRepository;
 
     //RFC6: Este es el metodo con nivel de aislamiento serializable
-    @Transactional(isolation = Isolation.SERIALIZABLE, rollbackFor = Exception.class)
+    @Transactional(isolation = Isolation.SERIALIZABLE, readOnly = true, rollbackFor = Exception.class)
     public ResponseEntity<?> obtenerDocumentosIngresoSerializable(Long idSucursal, Long idBodega) {
+
+        //Al buscar como restar fechas, es posible usar minusDays para hacerlo, que bieeen
+        //Entonces, restamos 30 dias a la fecha de hoy
+        Date fechaFinal = new Date(System.currentTimeMillis());
+        Date fechaInicio = new Date(fechaFinal.getTime() - TimeUnit.DAYS.toMillis(30));
 
         try {
 
-            // Temporizador de 30 segundos antes de la consulta
-            Thread.sleep(30000);
-
-            //Al buscar como restar fechas, es posible usar minusDays para hacerlo, que bieeen
-            //Entonces, restamos 30 dias a la fecha de hoy
-            LocalDate fechaLimite = LocalDate.now().minusDays(30);
-
             //Tomamos los docs de ingreso de los últimos 30 dias al hacer la busqueda con el repository
-            List<Map<String, Object>> documentos = documentoIngresoRepository.obtenerDocumentosIngreso(idSucursal, idBodega, fechaLimite);
+            List<Map<String, Object>> documentos = documentoIngresoRepository.obtenerDocumentosIngresoForUpdate(idSucursal, idBodega, fechaInicio, fechaFinal);
+
+             // Temporizador de 30 segundos antes de la consulta
+             Thread.sleep(30000);
 
             //¿Hay documentos en los ultimos 30 dias?
             //Si la consulta no da como resultado vacio, entonces si hay
@@ -93,10 +95,11 @@ public class ConsultaDocumentosService {
 
             //Al buscar como restar fechas, es posible usar minusDays para hacerlo, que bieeen
             //Entonces, restamos 30 dias a la fecha de hoy
-            LocalDate fechaLimite = LocalDate.now().minusDays(30);
+            Date fechaFinal = new Date(System.currentTimeMillis());
+            Date fechaInicio = new Date(fechaFinal.getTime() - TimeUnit.DAYS.toMillis(30));
 
             //Tomamos los docs de ingreso de los últimos 30 dias al hacer la busqueda con el repository
-            List<Map<String, Object>> documentos = documentoIngresoRepository.obtenerDocumentosIngreso(idSucursal, idBodega, fechaLimite);
+            List<Map<String, Object>> documentos = documentoIngresoRepository.obtenerDocumentosIngresoForUpdate(idSucursal, idBodega, fechaInicio, fechaFinal);
 
             //¿Hay documentos en los ultimos 30 dias?
             //Si la consulta no da como resultado vacio, entonces si hay
