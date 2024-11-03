@@ -41,7 +41,7 @@ public interface DocumentoIngresoRepository extends JpaRepository<DocumentoIngre
         "JOIN BODEGA ON DOCUMENTO_INGRESO.ID_BODEGA = BODEGA.ID \r\n" +
         "JOIN PROVEEDOR ON ORDEN_DE_COMPRA.NIT_PROVEEDOR = PROVEEDOR.NIT \r\n" +
         "WHERE ORDEN_DE_COMPRA.ID_SUCURSAL = :idSucursal AND DOCUMENTO_INGRESO.ID_BODEGA = :idBodega AND DOCUMENTO_INGRESO.FECHA_INGRESO >= :fechaLimite " +
-        "ORDER BY DOCUMENTO_INGRESO.FECHA_INGRESO DESC \r\n", nativeQuery = true)
+        "ORDER BY DOCUMENTO_INGRESO.FECHA_INGRESO DESC", nativeQuery = true)
         //Usamos un map por lo que no solo regresa objetos de tipo DocumentoIngreso, sino otros elementos 
         @QueryHints(value = {@QueryHint(name = "javax.persistence.lock.timeout", value = "0")})
         List<Map<String, Object>> obtenerDocumentosIngreso(@Param("idSucursal") Long idSucursal, @Param("idBodega") Long idBodega, @Param("fechaLimite") LocalDate fechaLimite);
