@@ -8,8 +8,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -31,8 +29,6 @@ import uniandes.edu.co.proyecto.repositorio.ProductoPedidoRepository;
 
 @Service
 public class IngresoProductoService {
-
-    private static final Logger logger = LoggerFactory.getLogger(IngresoProductoService.class);
 
 
     @Autowired
@@ -158,14 +154,11 @@ public class IngresoProductoService {
              return new ResponseEntity<>("El documento no se guardó correctamente.", HttpStatus.INTERNAL_SERVER_ERROR);
              }
  
-             logger.info("Documento de ingreso guardado correctamente con ID: " + documentoIngreso.getId());
- 
-
             respuesta.put("productos", productos);
             return new ResponseEntity<>(respuesta, HttpStatus.OK);
 
         } catch (Exception e) {
-            logger.error("Error durante la inserción", e);
+
             return new ResponseEntity<>("Error durante la inserción", HttpStatus.INTERNAL_SERVER_ERROR);
         }
 
