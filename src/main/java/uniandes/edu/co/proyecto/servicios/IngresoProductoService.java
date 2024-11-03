@@ -84,12 +84,6 @@ public class IngresoProductoService {
             // Persistimos el doc en la BD
             documentoIngresoRepository.save(documentoIngreso);
 
-            //Buscar el documento y ver si se guardo
-            Optional<DocumentoIngreso> savedDoc = documentoIngresoRepository.findById((long) documentoIngreso.getId());
-            if (savedDoc.isEmpty()) {
-            return new ResponseEntity<>("El documento no se guardó correctamente.", HttpStatus.INTERNAL_SERVER_ERROR);
-}
-
             // Guardamos en una collecion los productos y sus cantidades (de la orden de compra)
             Collection<ProductoPedido> productosPedido = productoPedidoRepository.obtenerProductosySuCantidadPorOrdenDeCompra(idOrdenCompra);
 
@@ -156,6 +150,16 @@ public class IngresoProductoService {
             respuesta.put("sucursal", ordenDeCompra.getIdSucursal().getNombre());
             respuesta.put("bodega", bodega.getNombre());
             respuesta.put("proveedor", ordenDeCompra.getNitProveedor().getNombre());
+
+
+             //Buscar el documento y ver si se guardo
+             Optional<DocumentoIngreso> savedDoc = documentoIngresoRepository.findById((long) documentoIngreso.getId());
+             if (savedDoc.isEmpty()) {
+             return new ResponseEntity<>("El documento no se guardó correctamente.", HttpStatus.INTERNAL_SERVER_ERROR);
+             }
+ 
+             logger.info("Documento de ingreso guardado correctamente con ID: " + documentoIngreso.getId());
+ 
 
             respuesta.put("productos", productos);
             return new ResponseEntity<>(respuesta, HttpStatus.OK);
