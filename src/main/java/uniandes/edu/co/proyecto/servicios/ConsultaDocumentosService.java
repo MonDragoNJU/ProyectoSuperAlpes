@@ -25,7 +25,7 @@ public class ConsultaDocumentosService {
     private DocumentoIngresoRepository documentoIngresoRepository;
 
     //RFC6: Este es el metodo con nivel de aislamiento serializable
-    @Transactional(isolation = Isolation.SERIALIZABLE, rollbackFor = Exception.class)
+    @Transactional(isolation = Isolation.SERIALIZABLE, readOnly = true, rollbackFor = Exception.class)
     public ResponseEntity<?> obtenerDocumentosIngresoSerializable(Long idSucursal, Long idBodega) {
 
         //Al buscar como restar fechas, es posible usar minusDays para hacerlo, que bieeen
@@ -36,7 +36,7 @@ public class ConsultaDocumentosService {
         try {
 
             // Temporizador de 30 segundos antes de la consulta
-            Thread.sleep(30000);
+            Thread.sleep(40000);
 
             //Tomamos los docs de ingreso de los últimos 30 dias al hacer la busqueda con el repository
             List<Map<String, Object>> documentos = documentoIngresoRepository.obtenerDocumentosIngresoForUpdate(idSucursal, idBodega, fechaInicio, fechaFinal);
