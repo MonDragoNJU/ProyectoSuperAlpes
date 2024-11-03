@@ -26,14 +26,14 @@ public class ConsultaDocumentosService {
     @Transactional(isolation = Isolation.SERIALIZABLE, rollbackFor = Exception.class)
     public ResponseEntity<?> obtenerDocumentosIngresoSerializable(Long idSucursal, Long idBodega) {
 
+        //Al buscar como restar fechas, es posible usar minusDays para hacerlo, que bieeen
+        //Entonces, restamos 30 dias a la fecha de hoy
+        LocalDate fechaLimite = LocalDate.now().minusDays(30);
+
         try {
 
             // Temporizador de 30 segundos antes de la consulta
             Thread.sleep(30000);
-
-            //Al buscar como restar fechas, es posible usar minusDays para hacerlo, que bieeen
-            //Entonces, restamos 30 dias a la fecha de hoy
-            LocalDate fechaLimite = LocalDate.now().minusDays(30);
 
             //Tomamos los docs de ingreso de los últimos 30 dias al hacer la busqueda con el repository
             List<Map<String, Object>> documentos = documentoIngresoRepository.obtenerDocumentosIngresoForUpdate(idSucursal, idBodega, fechaLimite);
@@ -86,14 +86,15 @@ public class ConsultaDocumentosService {
     @Transactional(isolation = Isolation.READ_COMMITTED, rollbackFor = Exception.class)
     public ResponseEntity<?> obtenerDocumentosIngresoReadCommitted(Long idSucursal, Long idBodega)  {
 
+        //Al buscar como restar fechas, es posible usar minusDays para hacerlo, que bieeen
+        //Entonces, restamos 30 dias a la fecha de hoy
+        LocalDate fechaLimite = LocalDate.now().minusDays(30);
+
+
         try {
 
             // Temporizador de 30 segundos antes de la consulta
             Thread.sleep(30000);
-
-            //Al buscar como restar fechas, es posible usar minusDays para hacerlo, que bieeen
-            //Entonces, restamos 30 dias a la fecha de hoy
-            LocalDate fechaLimite = LocalDate.now().minusDays(30);
 
             //Tomamos los docs de ingreso de los últimos 30 dias al hacer la busqueda con el repository
             List<Map<String, Object>> documentos = documentoIngresoRepository.obtenerDocumentosIngreso(idSucursal, idBodega, fechaLimite);
