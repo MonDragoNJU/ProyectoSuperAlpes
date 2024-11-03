@@ -13,6 +13,7 @@
             --gris-oscuro: #4a4a4a;
             --gris-claro: #f7f7f7;
             --blanco: #ffffff;
+            --azul: #072e45;
         }
 
         body {
@@ -61,6 +62,7 @@
             background-color: var(--verde-pastel);
         }
 
+
         footer {
             background-color: var(--verde-pastel-oscuro);
             color: var(--blanco);
@@ -68,20 +70,32 @@
             font-size: 0.9em;
             text-align: center;
         }
+
+        .btn-secondary {
+            background-color: var(--gris-oscuro);
+            border: none;
+        }
+
+        .btn-secondary:hover {
+            background-color: var(--verde-pastel-oscuro);
+            color: var(--blanco);
+        }
+
     </style>
 </head>
 <body>
     <!-- Barra de navegación -->
     <nav class="navbar navbar-expand-lg">
         <div class="container">
-            <a class="navbar-brand" href="/">SuperAndes</a>
+            <a class="navbar-brand" href="/"><img src="https://i.ibb.co/nzJ9cXh/logo.png" width="60" height="60" alt="SuperAndes Logo" class="d-inline-block align-text-center">
+                <span style="color: var(--azul);">SuperAndes</span></a>
         </div>
     </nav>
 
     <div class="container">
         <!-- Encabezado del Menú de Bodega -->
         <header class="text-center my-4">
-            <h1 class="display-6 text-primary">Menú de Bodega</h1>
+            <h1 class="display-6 text-primary" style="font-weight: bold">Menú de Bodega</h1>
         </header>
 
         <!-- Tarjeta con opciones de gestión de bodegas -->
@@ -94,21 +108,23 @@
                 <a href="/bodegas/nueva" class="btn btn-primary btn-lg my-2">Crear Nueva Bodega</a>
 
                 <!-- Borrar Bodega -->
-                <a href="/bodegas/eliminar" class="btn btn-secondary btn-lg my-2">Eliminar Bodega</a>
+                <a href="/bodegas/eliminar" class="btn btn-primary btn-lg my-2">Eliminar Bodega</a>
 
                 <!-- Índice de Ocupación -->
                 <a href="/bodegas/ocupacion/formulario" class="btn btn-primary btn-lg my-2">Índice de Ocupación de Bodegas de una Sucursal</a>
 
                 <!-- Reporte de Productos en Bodega -->
-                <a href="/productos/productosEnBodega/formulario" class="btn btn-secondary btn-lg my-2">Reporte de Productos en una Bodega</a>
+                <a href="/productos/productosEnBodega/formulario" class="btn btn-primary btn-lg my-2">Reporte de Productos en una Bodega</a>
             </div>
         </div>
 
         <!-- Botón de regreso al inicio -->
         <div class="text-center my-4">
-            <a href="/" class="btn btn-secondary">Volver al Inicio</a>
+            <a href="/" class="btn btn-secondary" style="width: auto;">Volver al Inicio</a>
         </div>
-    </div>
+        </div>
+
+
 
     <!-- Pie de página -->
     <footer>

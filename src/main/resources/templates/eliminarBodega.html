@@ -13,6 +13,7 @@
             --gris-oscuro: #4a4a4a;
             --gris-claro: #f7f7f7;
             --blanco: #ffffff;
+            --azul: #072e45;
         }
 
         body {
@@ -84,14 +85,15 @@
     <!-- Barra de navegación -->
     <nav class="navbar navbar-expand-lg">
         <div class="container">
-            <a class="navbar-brand" href="/">SuperAndes</a>
+            <a class="navbar-brand" href="/"><img src="https://i.ibb.co/nzJ9cXh/logo.png" width="60" height="60" alt="SuperAndes Logo" class="d-inline-block align-text-center">
+                <span style="color: var(--azul);">SuperAndes</span></a>
         </div>
     </nav>
 
     <div class="container">
         <!-- Encabezado del formulario -->
         <header class="text-center my-4">
-            <h1 class="display-6 text-primary">Eliminar Bodega</h1>
+            <h1 class="display-6 text-primary" style="font-weight: bold">Eliminar Bodega</h1>
         </header>
 
         <!-- Tarjeta del formulario de eliminación de bodega -->
@@ -106,7 +108,7 @@
                         <input type="number" class="form-control" id="idBodega" min="1" required>
                         <small class="form-text text-muted">El ID debe ser un número positivo.</small>
                     </div>
-                    <button type="submit" class="btn btn-danger">Eliminar Bodega</button>
+                    <button type="submit" class="btn btn-danger" >Eliminar Bodega</button>
                 </form>
                 <div id="responseMessage" class="mt-3"></div>
             </div>
@@ -114,7 +116,7 @@
 
         <!-- Botón para regresar al menú de bodega -->
         <div class="text-center my-4">
-            <a href="/menuBodega" class="btn btn-secondary">Volver al Menú de Bodegas</a>
+            <a href="/menuBodega" class="btn btn-secondary" style="width: auto;">Volver al Menú de Bodegas</a>
         </div>
     </div>
 

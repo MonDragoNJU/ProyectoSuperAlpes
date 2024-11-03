@@ -1,11 +1,9 @@
 body {
-    background-color: #f8f9fa; /* Color de fondo suave */
+    background-color: #f8f9fa; 
 }
 
 header {
-    background-color: #e9ecef; /* Fondo claro para el encabezado */
-    padding: 20px;
-    border-radius: 10px;
+    background-color: #e9ecef; 
 }
 
 h1 {

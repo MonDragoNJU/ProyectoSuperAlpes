@@ -12,6 +12,7 @@
             --gris-oscuro: #4a4a4a;
             --gris-claro: #f7f7f7;
             --blanco: #ffffff;
+            --azul: #072e45;
         }
 
         body {
@@ -30,7 +31,7 @@
 
         .container {
             margin-top: 30px;
-            max-width: 800px;
+            max-width: 1010px;
         }
 
         .card {
@@ -59,18 +60,19 @@
     <!-- Barra de navegación -->
     <nav class="navbar navbar-expand-lg">
         <div class="container">
-            <a class="navbar-brand" href="/">SuperAndes</a>
+            <a class="navbar-brand" href="/"><img src="https://i.ibb.co/nzJ9cXh/logo.png" width="60" height="60" alt="SuperAndes Logo" class="d-inline-block align-text-center">
+                <span style="color: var(--azul);">SuperAndes</span></a>
         </div>
     </nav>
 
     <div class="container">
         <header class="text-center my-4">
-            <h1 class="display-6 text-primary">Productos Bajo Nivel de Reorden</h1>
+            <h1 class="display-6 text-primary" style="font-weight: bold">Productos Bajo Nivel de Reorden</h1>
         </header>
 
         <!-- Botón para cargar productos -->
         <div class="text-center mb-4">
-            <button id="cargarProductos" class="btn btn-primary">Cargar Productos</button>
+            <button id="cargarProductos" class="btn btn-primary" style="border: none; width: 50%;">Cargar Productos</button>
         </div>
 
         <!-- Tarjeta para mostrar los productos -->
@@ -99,6 +101,11 @@
                 </div>
             </div>
         </div>
+
+        <div class="text-center my-4">
+            <a href="/menuProductos" class="btn btn-secondary" style="background-color: var(--gris-oscuro); color: var(--blanco);">Volver al Menú de Productos</a>
+        </div>
+
     </div>
 
     <!-- Pie de página -->

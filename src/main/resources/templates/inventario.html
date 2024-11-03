@@ -6,49 +6,67 @@
     <title>Productos en Bodega - SuperAndes</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
+        :root {
+            --verde-pastel: #b3e5b3;
+            --verde-pastel-oscuro: #8ac48a;
+            --gris-oscuro: #4a4a4a;
+            --gris-claro: #f7f7f7;
+            --blanco: #ffffff;
+            --azul: #072e45;
+        }
+
         body {
             background-color: #f7f7f7;
             font-family: Arial, sans-serif;
         }
-
         .navbar {
-            background-color: #4CAF50;
+            background-color: #8ac48a;
         }
-
         .navbar-brand {
-            color: white !important;
+            color: #ffffff !important;
+            font-weight: bold;
         }
-
         .container {
             margin-top: 30px;
-            max-width: 600px;
+            max-width: 700px;
         }
-
         .card {
-            margin-top: 20px;
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .card-header {
+            background-color: #b3e5b3;
+            color: #4a4a4a;
+            font-weight: bold;
+            text-align: center;
         }
 
         .btn-primary {
-            width: 100%;
-            background-color: #4CAF50;
+            background-color: #2e93ff;
             border: none;
+            width: 100%;
         }
-
-        .btn-primary:hover {
-            background-color: #45a049;
+        footer {
+            background-color: #8ac48a;
+            color: #ffffff;
+            padding: 10px 0;
+            font-size: 0.9em;
+            text-align: center;
         }
     </style>
 </head>
 <body>
     <nav class="navbar navbar-expand-lg">
         <div class="container">
-            <a class="navbar-brand" href="/">SuperAndes</a>
+            <a class="navbar-brand" href="/"><img src="https://i.ibb.co/nzJ9cXh/logo.png" width="60" height="60" alt="SuperAndes Logo" class="d-inline-block align-text-center">
+                <span style="color: var(--azul);">SuperAndes</span></a>
         </div>
     </nav>
 
     <div class="container">
         <header class="text-center my-4">
-            <h1 class="display-6">Consultar Productos en Bodega</h1>
+            <h1 class="display-6 text-primary" style="font-weight: bold">Consultar Productos en Bodega</h1>
         </header>
 
         <div class="card">
@@ -67,7 +85,20 @@
                 <div id="resultados" class="mt-4"></div>
             </div>
         </div>
+
+        <!-- Botón para regresar al menú de bodega -->
+        <div class="text-center my-4">
+            <a href="/menuBodega" class="btn btn-secondary" style="width: auto;">Volver al Menú de Bodegas</a>
+        </div>
+        
     </div>
+
+    <!-- Pie de página -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 SuperAndes. Hecho por el increíble Grupo 1.</p>
+        </div>
+    </footer>
 
     <script>
         document.getElementById('productosForm').addEventListener('submit', function(event) {
