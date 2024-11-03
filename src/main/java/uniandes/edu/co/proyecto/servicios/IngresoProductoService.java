@@ -8,6 +8,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -26,8 +28,12 @@ import uniandes.edu.co.proyecto.repositorio.OrdenDeCompraRepository;
 import uniandes.edu.co.proyecto.repositorio.ProductoEnBodegaRepository;
 import uniandes.edu.co.proyecto.repositorio.ProductoPedidoRepository;
 
+
 @Service
 public class IngresoProductoService {
+
+    private static final Logger logger = LoggerFactory.getLogger(IngresoProductoService.class);
+
 
     @Autowired
     private OrdenDeCompraRepository ordenDeCompraRepository;
@@ -149,8 +155,11 @@ public class IngresoProductoService {
             return new ResponseEntity<>(respuesta, HttpStatus.OK);
 
         } catch (Exception e) {
-            // Si ocurre una excepción, devolvemos solo el mensaje de error
-            return new ResponseEntity<>("Error durante el ingreso de productos: " + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+            logger.error("Error durante la inserción", e);
+            return new ResponseEntity<>("Error durante la inserción", HttpStatus.INTERNAL_SERVER_ERROR);
         }
+
+    
+
     }
 }
