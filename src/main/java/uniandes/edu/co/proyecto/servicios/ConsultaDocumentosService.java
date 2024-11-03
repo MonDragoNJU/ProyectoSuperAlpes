@@ -28,7 +28,9 @@ public class ConsultaDocumentosService {
 
         try {
 
-           
+   // Temporizador de 30 segundos antes de la consulta
+ Thread.sleep(10000);
+          
             //Al buscar como restar fechas, es posible usar minusDays para hacerlo, que bieeen
             //Entonces, restamos 30 dias a la fecha de hoy
             LocalDate fechaLimite = LocalDate.now().minusDays(30);
