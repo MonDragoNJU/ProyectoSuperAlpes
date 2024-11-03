@@ -28,9 +28,6 @@ public class ConsultaDocumentosService {
 
         try {
 
-   // Temporizador de 30 segundos antes de la consulta
- Thread.sleep(10000);
-          
             //Al buscar como restar fechas, es posible usar minusDays para hacerlo, que bieeen
             //Entonces, restamos 30 dias a la fecha de hoy
             LocalDate fechaLimite = LocalDate.now().minusDays(30);
@@ -38,8 +35,8 @@ public class ConsultaDocumentosService {
             //Tomamos los docs de ingreso de los últimos 30 dias al hacer la busqueda con el repository
             List<Map<String, Object>> documentos = documentoIngresoRepository.obtenerDocumentosIngreso(idSucursal, idBodega, fechaLimite);
 
- // Temporizador de 30 segundos antes de la consulta
- Thread.sleep(10000);
+            // Temporizador de 30 segundos antes de la consulta
+            Thread.sleep(30000);
 
 
             //¿Hay documentos en los ultimos 30 dias?
