@@ -2,9 +2,11 @@ package uniandes.edu.co.proyecto.servicios;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -28,7 +30,8 @@ public class ConsultaDocumentosService {
 
         //Al buscar como restar fechas, es posible usar minusDays para hacerlo, que bieeen
         //Entonces, restamos 30 dias a la fecha de hoy
-        LocalDate fechaLimite = LocalDate.now().minusDays(30);
+        Date fechaFinal = new Date(System.currentTimeMillis());
+        Date fechaInicio = new Date(fechaFinal.getTime() - TimeUnit.DAYS.toMillis(30));
 
         try {
 
