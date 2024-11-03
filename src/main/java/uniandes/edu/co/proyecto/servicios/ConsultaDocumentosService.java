@@ -29,7 +29,7 @@ public class ConsultaDocumentosService {
         try {
 
             // Temporizador de 30 segundos antes de la consulta
-            Thread.sleep(30000);
+            Thread.sleep(60000);
 
             //Al buscar como restar fechas, es posible usar minusDays para hacerlo, que bieeen
             //Entonces, restamos 30 dias a la fecha de hoy
@@ -89,7 +89,7 @@ public class ConsultaDocumentosService {
         try {
 
             // Temporizador de 30 segundos antes de la consulta
-            Thread.sleep(30000);
+            Thread.sleep(60000);
 
             //Al buscar como restar fechas, es posible usar minusDays para hacerlo, que bieeen
             //Entonces, restamos 30 dias a la fecha de hoy
