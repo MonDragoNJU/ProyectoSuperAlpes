@@ -133,7 +133,8 @@
                     </div>
                     <div class="mb-3">
                         <label for="fechaExpiracion" class="form-label">Fecha de Expiración</label>
-                        <input type="date" class="form-control" id="fechaExpiracion" required>
+                        <h6 class="text-muted" style="font-size: 0.8em; color: gray; margin-top: -10px;">Opcional</h6>
+                        <input type="date" class="form-control" id="fechaExpiracion">
                     </div>
                     <div class="mb-3">
                         <label for="codigoDeBarras" class="form-label">Código de Barras</label>
@@ -196,7 +197,7 @@
                 unidadMedida: document.getElementById('unidadMedida').value,
                 volumenEmpaque: document.getElementById('volumenEmpaque').value,
                 pesoEmpaque: document.getElementById('pesoEmpaque').value,
-                fechaExpiracion: document.getElementById('fechaExpiracion').value,
+                fechaExpiracion: document.getElementById('fechaExpiracion').value || null, // Fecha de expiración es opcional
                 codigoDeBarras: document.getElementById('codigoDeBarras').value,
                 clasificacionCategoria: { codigo: parseInt(document.getElementById('categoria').value) } // Asociar la categoría seleccionada
             };
