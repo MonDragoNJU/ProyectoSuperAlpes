@@ -30,6 +30,13 @@ public class SucursalController {
         return "sucursales";
     }
 
+    @GetMapping("/sucursales2")
+    @ResponseBody // Indica que el metodo se activa cuando se hace una peticion GET a la URL /sucursales
+    public Collection<Sucursal> sucursales2(Model model) {
+        Collection<Sucursal> listaSucursales = sucursalRepository.darSucursales();
+        return listaSucursales;
+    }
+
     @GetMapping("/menusucursales")
     public String menusucursales(Model model) {
         return "menusucursales";

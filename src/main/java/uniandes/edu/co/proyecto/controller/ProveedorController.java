@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 //import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import uniandes.edu.co.proyecto.modelo.Proveedor;
 import uniandes.edu.co.proyecto.repositorio.ProveedorRepository;
@@ -24,7 +25,8 @@ public class ProveedorController {
     private ProveedorRepository proveedorRepository; //Bean de la interfaz ProveedorRepository
 
     //Metodo que se encarga de devolver todos los proveedores
-    @GetMapping("/proveedores") //Indica que el metodo se activa cuando se hace una peticion GET a la URL /proveedores
+    @GetMapping("/proveedores")
+    @ResponseBody //Indica que el metodo se activa cuando se hace una peticion GET a la URL /proveedores
     public Collection<Proveedor> proveedores(){
         return proveedorRepository.darProveedores();
     }

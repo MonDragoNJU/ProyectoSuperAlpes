@@ -182,7 +182,7 @@
                     sucursales.forEach(sucursal => {
                         const option = document.createElement('option');
                         option.value = JSON.stringify(sucursal); // Store full object as string
-                        option.textContent = sucursal.nombre;
+                        option.textContent = `${sucursal.nombre} - ${sucursal.direccion}`;
                         sucursalSelect.appendChild(option);
                     });
                 });
@@ -195,7 +195,7 @@
                     proveedores.forEach(proveedor => {
                         const option = document.createElement('option');
                         option.value = JSON.stringify(proveedor); // Store full object as string
-                        option.textContent = proveedor.nombre;
+                        option.textContent = `${proveedor.nombre} - ${proveedor.direccion}`;
                         proveedorSelect.appendChild(option);
                     });
                 });
@@ -278,7 +278,7 @@
                     fechaCreacion: fechaCreacion,
                     fechaEntrega: fechaEntrega,
                     idSucursal: sucursal,
-                    proveedor: proveedor,
+                    nitProveedor: proveedor,
                     estado: "vigente"
                 };
 

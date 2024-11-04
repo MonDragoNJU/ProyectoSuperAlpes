@@ -29,7 +29,8 @@ public class ProductoController {
     private ProductoRepository productoRepository; //Bean de la interfaz ProductoRepository
 
     //Metodo que se encarga de devolver todos los productos
-    @GetMapping("/productos") //Indica que el metodo se activa cuando se hace una peticion GET a la URL /productos
+    @GetMapping("/productos") 
+    @ResponseBody //Indica que el metodo se activa cuando se hace una peticion GET a la URL /productos
     public Collection<Producto> producto(){
         return productoRepository.darProductos();
     }
