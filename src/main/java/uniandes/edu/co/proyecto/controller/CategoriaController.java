@@ -64,16 +64,13 @@ public class CategoriaController {
     }
 
     //Metodo que se encarga de crear una categoria
-    @PostMapping("/categorias/new/save") //Indica que el metodo se activa cuando se hace una peticion POST a la URL /categorias/new/save
-    public ResponseEntity<String> categoriaGuardar(@RequestBody Categoria categoria){
-        
-        try{
-            //Insertar la categoria en la base de datos
+    @PostMapping("/categorias/new/save")
+    public ResponseEntity<String> categoriaGuardar(@RequestBody Categoria categoria) {
+        try {
             categoriaRepository.insertarCategoria(categoria.getNombre(), categoria.getDescripcion(), categoria.getCaracteristicasAlmacenamiento());
-            return new ResponseEntity<>("Categoria creada exitosamente", HttpStatus.CREATED);
-        }
-        catch (Exception e){
-            return new ResponseEntity<>("Error al crear la categoria", HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<>("Categoría creada exitosamente", HttpStatus.CREATED);
+        } catch (Exception e) {
+            return new ResponseEntity<>("Error al crear la categoría", HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 

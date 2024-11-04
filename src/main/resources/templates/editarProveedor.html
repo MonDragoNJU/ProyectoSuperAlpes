@@ -108,7 +108,7 @@
                 </form>
 
                 <!-- Formulario para editar datos del proveedor (se oculta inicialmente) -->
-                <form id="editarProveedorForm" action="/proveedores/{nit}/edit/save" method="post" style="display: none;">
+                <form id="editarProveedorForm" action="#" method="post" style="display: none;">
                     <div class="mb-3">
                         <label for="nombre" class="form-label">Nombre:</label>
                         <input type="text" class="form-control" id="nombre" name="nombre" required>
@@ -125,7 +125,7 @@
                         <label for="telefonoPersonaContacto" class="form-label">Teléfono de Persona de Contacto:</label>
                         <input type="text" class="form-control" id="telefonoPersonaContacto" name="telefonoPersonaContacto" required>
                     </div>
-                    <button type="submit" class="btn btn-success">Guardar Cambios</button>
+                    <button type="button" id="guardarCambios" class="btn btn-success">Guardar Cambios</button>
                 </form>
 
                 <!-- Mensaje de error si el proveedor no se encuentra -->
@@ -147,12 +147,10 @@
     </footer>
 
     <script>
-        // JavaScript para mostrar u ocultar formularios según el resultado de la búsqueda
-        document.getElementById('buscarProveedorForm').onsubmit = function (event) {
+        document.getElementById('buscarProveedorForm').onsubmit = function(event) {
             event.preventDefault();
             const nit = document.getElementById('nit').value;
 
-            // Realizar solicitud AJAX para obtener el proveedor por NIT
             fetch(`/proveedores/${nit}`)
                 .then(response => {
                     if (response.ok) {
@@ -162,21 +160,46 @@
                     }
                 })
                 .then(proveedor => {
-                    // Rellenar el formulario con los datos del proveedor
                     document.getElementById('nombre').value = proveedor.nombre;
                     document.getElementById('direccion').value = proveedor.direccion;
                     document.getElementById('nombrePersonaContacto').value = proveedor.nombrePersonaContacto;
                     document.getElementById('telefonoPersonaContacto').value = proveedor.telefonoPersonaContacto;
 
-                    // Mostrar el formulario de edición y ocultar el mensaje de error
                     document.getElementById('editarProveedorForm').style.display = 'block';
                     document.getElementById('mensajeError').style.display = 'none';
                 })
                 .catch(error => {
-                    // Mostrar el mensaje de error si el proveedor no se encuentra
                     document.getElementById('editarProveedorForm').style.display = 'none';
                     document.getElementById('mensajeError').style.display = 'block';
                 });
+        };
+
+        document.getElementById('guardarCambios').onclick = function() {
+            const nit = document.getElementById('nit').value;
+            const proveedorData = {
+                nombre: document.getElementById('nombre').value,
+                direccion: document.getElementById('direccion').value,
+                nombrePersonaContacto: document.getElementById('nombrePersonaContacto').value,
+                telefonoPersonaContacto: document.getElementById('telefonoPersonaContacto').value
+            };
+
+            fetch(`/proveedores/${nit}/edit/save`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(proveedorData)
+            })
+            .then(response => {
+                if (response.ok) {
+                    alert('Proveedor actualizado con éxito');
+                } else {
+                    throw new Error('Error al actualizar el proveedor');
+                }
+            })
+            .catch(error => {
+                alert(error.message);
+            });
         };
     </script>
 </body>
